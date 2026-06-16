@@ -48,9 +48,9 @@ Before you review, find and read whatever governing documents the repository pro
 
 You must be able to state, in a single sentence, **what the user can do after this change that they could not do before.** Derive it from the commits, the code, and `PR-DESCRIPTION.md`.
 
-- If you cannot state it → the change's necessity is unclear; that is a finding.
+- If you cannot state it -> the change's necessity is unclear; that is a finding.
 
-- If `PR-DESCRIPTION.md` has no statement of user-facing capability → that missing section is a finding.
+- If `PR-DESCRIPTION.md` has no statement of user-facing capability -> that missing section is a finding.
 
 `PR-DESCRIPTION.md` is Elon Presley's (`dmitry.korolev+elon-presley@gmail.com`) note describing the change, and is where the user-facing-capability statement belongs. Treat it as a note, not code.
 
