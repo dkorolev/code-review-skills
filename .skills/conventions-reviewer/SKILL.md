@@ -52,9 +52,9 @@ The repo's documented standards (linters, style guides, `CONTRIBUTING`, editor c
 
 For each deviation, exactly one of these is the finding:
 
-1. **Conforming is a minimal change** → state the conforming form, or the smallest diff that gets there. Your suggestion carries it; you never apply it.
+1. **Conforming is a minimal change** -> state the conforming form, or the smallest diff that gets there. Your suggestion carries it; you never apply it.
 
-2. **The deviation is justified by the nature of the change** → do not demand conformance. Instead require an inline code comment that explains why the standard rule is broken here. If that comment is missing, the missing comment **is** the finding.
+2. **The deviation is justified by the nature of the change** -> do not demand conformance. Instead require an inline code comment that explains why the standard rule is broken here. If that comment is missing, the missing comment **is** the finding.
 
 There is no silent third option. A rule is either followed, given a minimal-change fix, or accompanied by a justifying comment.
 

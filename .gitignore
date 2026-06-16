@@ -1,4 +1,6 @@
-# Reviewer output envelope (see REVIEWER-INVARIANTS.md §5). Ignored so that one
-# skill writing its result does not dirty the working tree and trip the
-# clean-tree precondition (§3) for the next skill.
+# Keeping tmp/ gitignored is just good hygiene. The skills here write their scratch and
+# result files under tmp/, and scsh's own `run` preflight requires tmp/ to be gitignored.
+# This file is authoring infra, not shipped to consumers (scsh installskills sets that up
+# there); it lives here purely for in-repo sanity and to spare models false positives over
+# untracked scratch files.
 tmp/
