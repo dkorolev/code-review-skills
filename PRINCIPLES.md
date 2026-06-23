@@ -28,6 +28,8 @@ This file exists for two purposes: when the author edits a skill, they check it 
 
 - A reviewer MUST NOT create commits and MUST NOT add itself as an author or as a `Co-authored-by` trailer anywhere, ever.
 
+- A reviewer MUST NOT run the product, tests, builds, linters, or scripts from the repository under review. Review is static: read diffs, commit messages, and documentation only. Never invoke compilers, test runners, package managers, containers, or shell scripts to "verify" behavior — that is slow, may require secrets or env vars the run lacks, and is not code review. (`git log`, `git show`, and `git diff` to inspect commits are allowed.)
+
 ## 3. Preconditions — checked FIRST, before any analysis
 
 At the very top of the skill, before doing anything else, verify all of the following. If any fails, the skill does **not run**: it exits early and writes no review output.
@@ -108,6 +110,8 @@ There is one special author. They do not write product code — they commit **no
 These apply to every reviewer, on top of its own mandate.
 
 - **Repository guidelines:** before reviewing, every reviewer reads whatever governing documents the repository provides and holds the change to them — `CONTRIBUTING.md`; agent and model instruction files such as `AGENTS.md` and `CLAUDE.md` (all of them, including any nested in subdirectories); and any conventions the repo declares: a constitution and its amendments, development principles, maxims, and style guides. Apply every relevant rule diligently when leaving findings. A violation of a stated repository principle is a legitimate finding for the reviewer whose mandate covers it; as with correctness, no reviewer ignores a clear violation it sees.
+
+- **Static review only:** never execute anything from the repository under review to "check" or "try" the change — no builds, tests, scripts, linters, or the product itself. Reason from the diff and docs; leave running to humans and CI.
 
 - **Correctness and logic:** beyond its specialty, every reviewer also checks that the code is *correct* — that it does what it is meant to, handles its edge cases, and contains no logic errors (inverted or wrong conditionals, off-by-one, mishandled errors, a result that contradicts the code's or commit's stated intent). A correctness or logic bug is a legitimate finding for any reviewer that sees it; no reviewer is excused because it is "not my specialty." Each reviewer applies this at its own depth — the shallow ones catch the obvious bugs, the judgment-heavy ones reason further — but none ignores a bug in front of it.
 
