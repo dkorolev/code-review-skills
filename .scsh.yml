@@ -1,46 +1,83 @@
 # .scsh.yml — code-review-skills authoring repo (see PRINCIPLES.md section 8).
 # Skills-only manifest: scsh supplies the base image (alpine + opencode + git),
-# so there are no version/project/image headers. `scsh installskills <this-repo>` reads
-# this manifest and installs every listed skill into the consumer's own .scsh.yml — except
-# authoring-only ones named `internal-*` (like internal-self-check-reviewers). Skill
-# directories live under .skills/ (.skills/<name>/); manifest keys are skill names.
-#
-# Every skill is in a profile, so a bare `scsh run` (the default profile) is intentionally a
-# no-op — scsh just lists the available profiles. Run one explicitly:
-#   `scsh run --profile code-review`          the five reviewers
+# so there are no version/project/image headers. Each key matches a `.skills/<name>/`
+# folder. Reviewers declare an `invocations:` matrix (three model routes each);
+# `scsh run --profile code-review` expands them to `{reviewer}-{route}` invocations.
+# `scsh installskills` copies this manifest verbatim (matrix intact); expansion
+# happens at run time.
 #   `scsh run --profile internal-self-check`  the authoring-only family auditor
 
 skills:
   conventions-reviewer:
-    harness: opencode
-    model: openai/gpt-5.5
-    timeout: 1200
     profile: code-review
-    result: tmp/code-review-conventions-reviewer.json
+    timeout: 1200
+    result: tmp/code-review-conventions-reviewer-{name}.json
+    invocations:
+      opencode-gpt-5.5:
+        harness: opencode
+        model: openai/gpt-5.5
+      claude-opus-4-8:
+        harness: claude
+        model: claude-opus-4-8
+      opencode-glm-5.2:
+        harness: opencode
+        model: nebius-glm/zai-org/GLM-5.2
   justification-reviewer:
-    harness: opencode
-    model: openai/gpt-5.5
-    timeout: 1200
     profile: code-review
-    result: tmp/code-review-justification-reviewer.json
+    timeout: 1200
+    result: tmp/code-review-justification-reviewer-{name}.json
+    invocations:
+      opencode-gpt-5.5:
+        harness: opencode
+        model: openai/gpt-5.5
+      claude-opus-4-8:
+        harness: claude
+        model: claude-opus-4-8
+      opencode-glm-5.2:
+        harness: opencode
+        model: nebius-glm/zai-org/GLM-5.2
   reviewability-reviewer:
-    harness: opencode
-    model: openai/gpt-5.5
-    timeout: 1200
     profile: code-review
-    result: tmp/code-review-reviewability-reviewer.json
+    timeout: 1200
+    result: tmp/code-review-reviewability-reviewer-{name}.json
+    invocations:
+      opencode-gpt-5.5:
+        harness: opencode
+        model: openai/gpt-5.5
+      claude-opus-4-8:
+        harness: claude
+        model: claude-opus-4-8
+      opencode-glm-5.2:
+        harness: opencode
+        model: nebius-glm/zai-org/GLM-5.2
   sanity-reviewer:
-    harness: opencode
-    model: openai/gpt-5.5
-    timeout: 1200
     profile: code-review
-    result: tmp/code-review-sanity-reviewer.json
+    timeout: 1200
+    result: tmp/code-review-sanity-reviewer-{name}.json
+    invocations:
+      opencode-gpt-5.5:
+        harness: opencode
+        model: openai/gpt-5.5
+      claude-opus-4-8:
+        harness: claude
+        model: claude-opus-4-8
+      opencode-glm-5.2:
+        harness: opencode
+        model: nebius-glm/zai-org/GLM-5.2
   testing-reviewer:
-    harness: opencode
-    model: openai/gpt-5.5
-    timeout: 1200
     profile: code-review
-    result: tmp/code-review-testing-reviewer.json
+    timeout: 1200
+    result: tmp/code-review-testing-reviewer-{name}.json
+    invocations:
+      opencode-gpt-5.5:
+        harness: opencode
+        model: openai/gpt-5.5
+      claude-opus-4-8:
+        harness: claude
+        model: claude-opus-4-8
+      opencode-glm-5.2:
+        harness: opencode
+        model: nebius-glm/zai-org/GLM-5.2
   internal-self-check-reviewers:
     harness: opencode
     model: openai/gpt-5.5
