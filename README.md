@@ -16,7 +16,7 @@ scsh installskills https://github.com/dimacurrentai/code-review-skills
 scsh run --profile code-review     # up to fifteen reviewers (five × three model routes), over origin/main..HEAD
 ```
 
-When all three model routes are available on the host — GPT via opencode (`openai/gpt-5.5`), Opus via claude (`claude-opus-4-8`), and GLM-5.2 via opencode (`nebius-glm/zai-org/GLM-5.2`) — the fleet runs fifteen invocations in parallel. scsh skips routes whose harness or model is unavailable.
+When all three model routes are available on the host — Codex Terra via codex (`gpt-5.6-terra`), Opus via claude (`claude-opus-4-8`), and Cursor Auto via cursor (`auto`) — the fleet runs fifteen invocations in parallel. scsh skips routes whose harness or model is unavailable.
 
 The authoring-only **`internal-self-check-reviewers`** is **not** installed (its `internal-` name marks it internal to this repo). Everything below is for working **on** the skills here.
 
