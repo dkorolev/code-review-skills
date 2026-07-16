@@ -4,17 +4,26 @@ This repository is the **authoring home** for a family of self-contained, AI-Ass
 
 ## Use these reviewers with `scsh`
 
-These reviewers are built to run under **`scsh`** (Scoped Skills Helper) — it runs each skill in parallel, in an ephemeral container, on a clean clone of your repo. Install the whole family into any repository with one command:
+These reviewers are built to run under **`scsh`** (Scoped Skills Helper) — it runs each skill in parallel, in an ephemeral container, on a clean clone of your repo. Install the whole family machine-wide with one command:
 
 ```sh
-scsh installskills https://github.com/dimacurrentai/code-review-skills
+scsh installskills --global https://github.com/dkorolev/code-review-skills
 ```
 
-`scsh` reads this repo's `.scsh.yml`, copies the five reviewers into your `.skills/`, and merges each reviewer's YAML block **verbatim** (including the `invocations:` matrix) into your own `.scsh.yml`. At run time, `scsh run --profile code-review` expands those five skills into fifteen invocations named `{reviewer}-{route}`. It also wires the per-harness discovery symlinks (`.claude/skills`, `.codex/skills`, `.cursor/skills`, ...) and gitignores `tmp/` in that target repo — so this source repo ships no symlinks of its own. It does keep a local `tmp/` `.gitignore` for in-repo sanity, but that is authoring infra and is not installed into consumers. You can review a branch right away:
+`scsh` reads this repo's `.scsh.yml`, copies the five reviewers under `~/.scsh/.skills/`, and merges each reviewer's YAML block **verbatim** (including the `invocations:` matrix) into the global manifest `~/.scsh/.scsh.yml`. At run time, `scsh run --profile code-gorgeous-review` expands those five skills into fifteen invocations named `{reviewer}-{route}`. The gorgeous-specific profile name deliberately does not collide with an older repository's local `code-review` profile, so the global manifest still serves the gorgeous fleet there. `scsh` also wires the per-harness user-level discovery symlinks (`~/.claude/skills`, `~/.codex/skills`, `~/.cursor/skills`, ...) — no `.scsh.yml` or `.skills/` needs to land in the repository under review. This source repo keeps a local `tmp/` `.gitignore` only for in-repo authoring sanity. You can review a branch right away:
 
 ```sh
-scsh run --profile code-review     # up to fifteen reviewers (five × three model routes), over origin/main..HEAD
+scsh run --profile code-gorgeous-review     # up to fifteen reviewers (five x three model routes), over origin/main..HEAD
 ```
+
+To migrate an existing global install from the old `code-review` profile, upgrade `scsh` and refresh this source so its manifest blocks are updated in place:
+
+```sh
+cargo install scsh
+scsh updateskills --global https://github.com/dkorolev/code-review-skills
+```
+
+For a team that deliberately wants to commit the reviewers into one repository instead, omit `--global`; the same manifest and profile are installed locally.
 
 When all three model routes are available on the host — Codex Terra via codex (`gpt-5.6-terra`), Opus via claude (`claude-opus-4-8`), and Cursor Auto via cursor (`auto`) — the fleet runs fifteen invocations in parallel. scsh skips routes whose harness or model is unavailable.
 
