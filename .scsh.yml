@@ -84,8 +84,9 @@ skills:
         harness: cursor
         model: auto
   internal-self-check-reviewers:
-    harness: opencode
-    model: openai/gpt-5.5
+    harness: codex
+    model: gpt-5.6-terra
+    effort: high
     timeout: 600
     profile: internal-self-check
     autoinstall: false
