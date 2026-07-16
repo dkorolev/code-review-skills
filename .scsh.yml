@@ -2,14 +2,14 @@
 # Skills-only manifest: scsh supplies the base image (alpine + opencode + git),
 # so there are no version/project/image headers. Each key matches a `.skills/<name>/`
 # folder. Reviewers declare an `invocations:` matrix (three model routes each);
-# `scsh run --profile code-review` expands them to `{reviewer}-{route}` invocations.
+# `scsh run --profile code-gorgeous-review` expands them to `{reviewer}-{route}` invocations.
 # `scsh installskills` copies this manifest verbatim (matrix intact); expansion
 # happens at run time.
 #   `scsh run --profile internal-self-check`  the authoring-only family auditor
 
 skills:
   conventions-reviewer:
-    profile: code-review
+    profile: code-gorgeous-review
     timeout: 1200
     result: tmp/code-review-conventions-reviewer-{name}.json
     invocations:
@@ -24,7 +24,7 @@ skills:
         harness: cursor
         model: auto
   justification-reviewer:
-    profile: code-review
+    profile: code-gorgeous-review
     timeout: 1200
     result: tmp/code-review-justification-reviewer-{name}.json
     invocations:
@@ -39,7 +39,7 @@ skills:
         harness: cursor
         model: auto
   reviewability-reviewer:
-    profile: code-review
+    profile: code-gorgeous-review
     timeout: 1200
     result: tmp/code-review-reviewability-reviewer-{name}.json
     invocations:
@@ -54,7 +54,7 @@ skills:
         harness: cursor
         model: auto
   sanity-reviewer:
-    profile: code-review
+    profile: code-gorgeous-review
     timeout: 1200
     result: tmp/code-review-sanity-reviewer-{name}.json
     invocations:
@@ -69,7 +69,7 @@ skills:
         harness: cursor
         model: auto
   testing-reviewer:
-    profile: code-review
+    profile: code-gorgeous-review
     timeout: 1200
     result: tmp/code-review-testing-reviewer-{name}.json
     invocations:
