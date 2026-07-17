@@ -24,9 +24,9 @@ You are authoring-only: you live in this repo, are never copied to a target repo
 
 - **Section 1** — valid YAML frontmatter with `name` (matching the directory) and a `description` that states which kind of code reviewer it is.
 
-- **Section 2** — it reviews and reports only; it never modifies, fixes, stages, or commits, and never adds itself as an author or `Co-authored-by`.
+- **Section 2** — it reviews and reports only; it never modifies, fixes, stages, or commits, never adds itself as an author or `Co-authored-by`, and never builds, runs, lints, tests, executes repository scripts, or invokes the product under review.
 
-- **Self-contained** — it restates, in its own words, every rule it depends on: the preconditions (section 3), including the under-scsh no-fetch/no-pull/no-clone rule; the `origin/main..HEAD` commit-by-commit range and the Elon-Presley commit exclusion (section 4); the output contract and schema, writing to `$SCSH_RESULT` under scsh or its own `tmp/code-review-<name>.json` when invoked alone (section 5); the special author and note-handling (section 6); and the shared baseline (section 7) — correctness-and-logic, overlap-is-fine, repository-guidelines, tone, and human-in-the-loop. Anchoring (`file`/`line`/`commit`) is described.
+- **Self-contained** — it restates, in its own words, every rule it depends on: the preconditions (section 3), including the under-scsh no-fetch/no-pull/no-clone rule; the `origin/main..HEAD` commit-by-commit range and the Elon-Presley commit exclusion (section 4); the output contract and schema, writing to `$SCSH_RESULT` under scsh or its own `tmp/code-review-<name>.json` when invoked alone (section 5); the special author, note-handling, and no-verification-in-PR-description rule (section 6); and the shared baseline (section 7) — correctness-and-logic, overlap-is-fine, repository-guidelines, tone, and human-in-the-loop. Anchoring (`file`/`line`/`commit`) is described.
 
 - **No external reference** — it never mentions or depends on `PRINCIPLES.md`; it would still work copied alone into a target repo.
 
