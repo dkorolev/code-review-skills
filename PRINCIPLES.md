@@ -105,6 +105,8 @@ There is one special author. They do not write product code — they commit **no
 
   A `PR-DESCRIPTION.md` that doesn't follow this shape, or that misrepresents the change, is a legitimate finding for the skills whose mandate covers it.
 
+- **Verification stays in the branch.** Tests, README files, and committed verification documents carry verification commands, expected results, and checklists. Reviewers MUST NOT require `PR-DESCRIPTION.md` to grow a testing or verification section; it remains change narrative, subject to the target repository's own required shape.
+
 ## 7. Shared baseline across all reviewers
 
 These apply to every reviewer, on top of its own mandate.
