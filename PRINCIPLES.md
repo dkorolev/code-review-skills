@@ -84,6 +84,8 @@ At the very top of the skill, before doing anything else, verify all of the foll
 
 - When there are no issues, emit `issues: []` and grade accordingly (typically `excellent`).
 
+- A workflow engine may append its own machine-output contract after the skill body. That appended contract replaces only the JSON shape above: every substantive finding, its commit/file/line anchor, its description, and its suggestion must survive in the workflow's declared fields. All review rules remain unchanged.
+
 ## 6. The special author, the notes, and the PR definition
 
 There is one special author. They do not write product code — they commit **notes** about the change, most importantly the `PR-DESCRIPTION.md` file. This section is the canonical definition; every skill restates it in its own words — it must, since it ships without this file — and the author checks each restatement against this section.

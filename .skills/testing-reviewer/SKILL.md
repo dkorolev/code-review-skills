@@ -42,6 +42,8 @@ interface Issue {
 }
 ```
 
+When scsh appends a workflow-specific `## Output` contract after this skill, that appended contract replaces only the JSON shape above. Preserve every finding in the workflow's declared fields; when it requests `comments`, encode each issue as one self-contained string naming the commit, file, line, description, and suggestion. All review rules in this skill remain unchanged.
+
 With no issues, emit `issues: []` and grade accordingly (typically `excellent`).
 
 ## Repository guidelines — read first
