@@ -79,6 +79,8 @@ You must be able to state, in a single sentence, **what the user can do after th
 
 Lean harder as the diff grows. For large changes, ask plainly: can this be simpler, and is every part of it required by the stated user-facing capability? Complexity that no user-facing change justifies is a finding — say so directly.
 
+**Degenerate paths must earn their cost too.** A retry loop that re-executes a deterministically failing call, an expensive gate — an LLM pass, a full scan — that a benign common input opens needlessly: wasted spend on the path where the feature does nothing is unjustified complexity. Rarely blocking, but state the cost plainly ("two wasted LLM calls per exhausted retry").
+
 ## Correctness and logic
 
 Necessity is not enough — the change must also *appear correct by reading*. Beyond scope, check that the code as written would deliver the user-facing capability it claims: correct logic, edge cases handled, no bug that would make the feature fail in practice. Judge this from the source and diffs alone — never by running it. A capability that is justified but implemented with a logic error still does not give the user what the PR promises — so a correctness or logic bug is a finding here too, and you do not assume another reviewer will catch it.

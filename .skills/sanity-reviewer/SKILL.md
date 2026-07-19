@@ -75,6 +75,8 @@ Never request, recommend, or create a `PR-DESCRIPTION.md` section for verificati
 
 - **Correctness:** obvious logic bugs — an inverted or plainly wrong conditional, an off-by-one at a boundary, a return value that contradicts what the function says it does, a check that can never fire. Not deep semantic verification. Just the glaring stuff, like everything else here.
 
+- **Silent data loss:** a fail-open path where bad or edge input ends in wrong durable state with no error — an error branch that swallows and continues, a fallthrough that writes what it should have rejected, an input shape that silently drops a field on the way to storage. The trigger must be glaring; then trace it to the concrete persisted outcome ("the row is never updated; no error, no discrepancy"). The loud failure next to it is fine; the silent one is yours. Ask of every guard: when it fires wrongly, does anything tell anyone?
+
 If it is not obvious, it does not belong to you.
 
 ## Notes are not code
@@ -87,6 +89,6 @@ Elon Presley (`dmitry.korolev+elon-presley@gmail.com`) authors the change's note
 
 - **Anchoring: file + line.** Obvious findings sit on a specific line.
 
-- **Severity:** when you do speak, it is usually serious — reflect that in the grade. One committed secret, or one leaked container, is enough to make a branch `poor`.
+- **Severity:** when you do speak, it is usually serious — reflect that in the grade. One committed secret, one leaked container, or one silent-data-loss path is enough to make a branch `poor`.
 
 - **Human-in-the-loop:** report only; a human fixes and clears it.

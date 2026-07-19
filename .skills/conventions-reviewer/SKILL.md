@@ -69,6 +69,8 @@ Never request, recommend, or create a `PR-DESCRIPTION.md` section for verificati
 
 The repo's documented standards (linter/formatter *configs* and style guides you **read**, never invoke; `CONTRIBUTING`; editor config) **and** its de facto patterns (how the surrounding code is actually written). "Maximums" — line length, file size, function length, parameter counts — are conventions and belong to you. Judge them by reading; do not run the tools that enforce them.
 
+**Copies and mirrors are conventions.** A near-verbatim copy of logic, a constant hand-maintained in two places, a contract mirrored across surfaces — a serialization struct and its counterpart, a parser and its twin, a config key its sibling files all carry — the de facto standard is that they move together. A new copy, or a change that touches one side of a mirror and not the other, is a deviation under the decision rule below: name the shared helper or constant (minimal change), or require the comment justifying why the copies must stay separate. Frame the finding as future drift ("when one twin is edited, the other silently disagrees"), never as aesthetics — and do not demand unification of code that only looks similar but differs for real.
+
 ## Decision rule for every deviation
 
 For each deviation, exactly one of these is the finding:
@@ -81,7 +83,7 @@ There is no silent third option. A rule is either followed, given a minimal-chan
 
 ## Verify comments match the code
 
-Flag in-code comments and commit messages that no longer match what the code does — a stale or wrong comment is a convention failure.
+Flag in-code comments and commit messages that no longer match what the code does — a stale or wrong comment is a convention failure. Absolutes the code does not earn — "impossible", "never", "guaranteed", "exactly once" where the mechanism is merely unlikely or at-most-once — are stale-comment findings too; the fix is honest wording, not code.
 
 ## Notes are not code
 

@@ -71,7 +71,9 @@ Never request, recommend, or create a `PR-DESCRIPTION.md` section for verificati
 
 - **Unrelated changes bundled together** — two or more independent changes in one branch. Suggest splitting into separate pull requests. This is your core call: different commits, different PRs.
 
-- **PR description presentation** — `PR-DESCRIPTION.md` must lead with the big picture and then descend into the details. Flag a description that buries the point, is out of order, or is hard to follow. (Whether it is *accurate* is also checked here when no other reviewer owns it; whether it is *justified* belongs to justification-reviewer.)
+- **Undisclosed collateral changes** — a threshold loosened, a timeout grown, a default flipped, a gate re-baselined, riding inside a PR about something else and absent from `PR-DESCRIPTION.md`. The change may be fine; the silence is the finding. The remedy is a sentence of disclosure in the description, not a code change and usually not a split — but an undisclosed weakening of a repo-wide gate is blocking.
+
+- **PR description presentation** — `PR-DESCRIPTION.md` must lead with the big picture and then descend into the details. Flag a description that buries the point, is out of order, or is hard to follow. Also hold it to the diff: every number, threshold, filename, and behavior claim must match the tree — a description that contradicts the diff reads as written against an older head, leaves reviewers reasoning from a false picture, and is blocking; regenerate it against this head. (Whether the change is *justified* belongs to justification-reviewer.)
 
 ## The PR description
 
