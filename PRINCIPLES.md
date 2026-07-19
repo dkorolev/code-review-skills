@@ -73,6 +73,7 @@ At the very top of the skill, before doing anything else, verify all of the foll
 
   interface Issue {
     commit: string;       // SHA of the commit where this should be addressed
+    severity: "blocking" | "should-fix" | "nit";  // argued by failure direction — see section 7
     file: string;         // path; "PR-DESCRIPTION.md" for PR-definition findings; "<commit>" when no single file applies
     line: number;         // line number; 0 when the finding is commit- or PR-level, not line-specific
     description: string;  // what the problem is
@@ -84,7 +85,7 @@ At the very top of the skill, before doing anything else, verify all of the foll
 
 - When there are no issues, emit `issues: []` and grade accordingly (typically `excellent`).
 
-- A workflow engine may append its own machine-output contract after the skill body. That appended contract replaces only the JSON shape above: every substantive finding, its commit/file/line anchor, its description, and its suggestion must survive in the workflow's declared fields. All review rules remain unchanged.
+- A workflow engine may append its own machine-output contract after the skill body. That appended contract replaces only the JSON shape above: every substantive finding, its severity, its commit/file/line anchor, its description, and its suggestion must survive in the workflow's declared fields; when the workflow requests findings as plain strings, each string leads with its severity in brackets. All review rules remain unchanged.
 
 ## 6. The special author, the notes, and the PR definition
 
@@ -118,6 +119,14 @@ These apply to every reviewer, on top of its own mandate.
 - **Static review only:** never execute anything from the repository under review to "check" or "try" the change — no builds, tests, scripts, linters, or the product itself. Reason from the diff and docs; leave running to humans and CI.
 
 - **Correctness and logic:** beyond its specialty, every reviewer also checks that the code is *correct* — that it does what it is meant to, handles its edge cases, and contains no logic errors (inverted or wrong conditionals, off-by-one, mishandled errors, a result that contradicts the code's or commit's stated intent). A correctness or logic bug is a legitimate finding for any reviewer that sees it; no reviewer is excused because it is "not my specialty." Each reviewer applies this at its own depth — the shallow ones catch the obvious bugs, the judgment-heavy ones reason further — but none ignores a bug in front of it.
+
+- **Finding discipline — severity:** every issue carries a `severity` (`blocking`, `should-fix`, or `nit`), argued by failure direction, never just asserted: silent-and-permanent escalates (data lost with no error, a broken emitted contract, a defeated CI gate); loud, transient, or self-healing downgrades. The description names the direction ("fail-closed, so a nit"). `blocking` is rare and earned; the severity mix, not the raw issue count, drives the grade.
+
+- **Finding discipline — scope:** a problem that already exists on `origin/main` in code the diff does not touch is not a finding against the branch — at most one `nit` marking it as a pre-existing follow-up, and it never lowers the grade.
+
+- **Finding discipline — one root cause, one finding:** anchor each defect at its clearest site and list the other affected locations in the description; never file the same defect once per line it manifests on.
+
+- **Finding discipline — evidence:** when a finding rests on a checkable claim (a symbol does not exist, two bodies are byte-identical, nothing calls this function), check it by reading or searching (`grep`, `git log`) and say so in the description. Reading and searching only; static review stays static.
 
 - **Overlap is expected:** the reviewers' mandates intentionally overlap, and this shared correctness baseline widens that overlap. Minor overlap is absolutely fine — two reviewers flagging the same issue is the system working, not a defect. Never stay silent on a real problem just because another reviewer might also catch it; a finding reported twice is far better than a finding missed.
 
